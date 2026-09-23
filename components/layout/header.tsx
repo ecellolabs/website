@@ -30,6 +30,7 @@ export default function Header({ content, locale }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openKey, setOpenKey] = useState<string | null>(null);
+  const [mobileKey, setMobileKey] = useState<string | null>(null);
   const [headerH, setHeaderH] = useState(73);
 
   const headerRef = useRef<HTMLElement | null>(null);
@@ -41,6 +42,9 @@ export default function Header({ content, locale }: HeaderProps) {
 
   const activeItem = content.nav.find((l) => l.menu !== null && l.label === openKey) ?? null;
   const activeMenu = (activeItem?.menu ?? null) as unknown as MegaMenu | null;
+
+  const mobileItem = content.nav.find((l) => l.menu !== null && l.label === mobileKey) ?? null;
+  const mobileMenu = (mobileItem?.menu ?? null) as unknown as MegaMenu | null;
 
   /* header chrome */
 
@@ -116,11 +120,20 @@ export default function Header({ content, locale }: HeaderProps) {
 
   /* mobile drawer */
 
+  // Reset the submenu on open, not on close: resetting on a link click re-renders
+  // the drawer CTA's href before the browser follows it.
+  const openDrawer = () => {
+    setMobileKey(null);
+    setMenuOpen(true);
+  };
+
+  const closeDrawer = useCallback(() => setMenuOpen(false), []);
+
   useEffect(() => {
     if (!menuOpen) return;
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key === "Escape") closeDrawer();
     };
     document.addEventListener("keydown", onKeyDown);
     const previousOverflow = document.body.style.overflow;
@@ -129,7 +142,7 @@ export default function Header({ content, locale }: HeaderProps) {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
     };
-  }, [menuOpen]);
+  }, [menuOpen, closeDrawer]);
 
   const solidHeader = menuOpen || Boolean(openKey);
 
@@ -235,7 +248,7 @@ export default function Header({ content, locale }: HeaderProps) {
               className="relative z-70 flex flex-col justify-center items-center gap-1.5 w-10 h-10 -mr-2 bg-transparent border-none cursor-pointer"
               aria-label={menuOpen ? content.closeMenu : content.openMenu}
               aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((v) => !v)}
+              onClick={() => (menuOpen ? closeDrawer() : openDrawer())}
             >
               <span
                 className={`block w-6 h-0.5 bg-[var(--color-navy)] rounded-sm transition-transform duration-300 ease-out ${
@@ -392,7 +405,7 @@ export default function Header({ content, locale }: HeaderProps) {
 
       {/* Mobile drawer backdrop */}
       <div
-        onClick={() => setMenuOpen(false)}
+        onClick={closeDrawer}
         aria-hidden
         className={`fixed inset-0 z-55 bg-[var(--color-navy)]/40 backdrop-blur-sm transition-opacity duration-300 ease-out md:hidden ${
           menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -410,60 +423,197 @@ export default function Header({ content, locale }: HeaderProps) {
         }`}
       >
         <div className="flex-1 px-6 py-5 overflow-y-auto">
-          <nav className="flex flex-col">
-            {content.nav.map((link) => (
-              <a
-                key={link.href}
-                href={localizeHref(locale, link.href)}
-                target={isExternal(link.href) ? "_blank" : undefined}
-                rel={isExternal(link.href) ? "noopener noreferrer" : undefined}
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between gap-3 font-[family-name:var(--font-bricolage)] text-lg font-bold text-[var(--color-navy)] py-3 border-b border-[var(--color-line)]"
+          {mobileMenu && mobileItem ? (
+            /* Mobile submenu (replaces the main nav inside the drawer) */
+            <div>
+              <button
+                type="button"
+                onClick={() => setMobileKey(null)}
+                className="flex items-center gap-2 bg-transparent border-none cursor-pointer p-0 text-[15px] font-medium text-[#33405a]"
               >
-                {link.href === "#about" ? "About us" : link.label}
-                {isExternal(link.href) ? (
-                  <svg viewBox="0 0 16 16" aria-hidden className="w-3.5 h-3.5 opacity-50">
-                    <path
-                      d="M6 3h7v7M13 3 4 12"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.7"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                ) : null}
-              </a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-3 mt-6">
-            {SOCIALS.map(({ label, href, icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="grid place-items-center w-10 h-10 rounded-full border-2 border-[var(--color-navy)] text-[var(--color-navy)]"
-              >
-                <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" aria-hidden>
-                  {icon}
+                <svg viewBox="0 0 16 16" aria-hidden className="w-3.5 h-3.5">
+                  <path
+                    d="M10 3 5 8l5 5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
+                {content.backMenu}
+              </button>
+
+              <p className="font-[family-name:var(--font-bricolage)] text-2xl font-bold text-[var(--color-navy)] mt-4">
+                {mobileItem.label}
+              </p>
+
+              <a
+                href={localizeHref(locale, mobileMenu.featured.href)}
+                target={isExternal(mobileMenu.featured.href) ? "_blank" : undefined}
+                rel={isExternal(mobileMenu.featured.href) ? "noopener noreferrer" : undefined}
+                onClick={closeDrawer}
+                className="block rounded-2xl border border-[var(--color-line)] bg-white/70 p-5 mt-4"
+              >
+                <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5b6b8a]">
+                  {mobileMenu.featured.eyebrow}
+                </span>
+                <span className="block font-[family-name:var(--font-bricolage)] text-[19px] leading-[1.2] font-bold text-[var(--color-navy)] mt-2">
+                  {mobileMenu.featured.title}
+                </span>
+                <span className="block text-[14px] leading-[1.55] text-[#33405a] mt-2">
+                  {mobileMenu.featured.body}
+                </span>
               </a>
-            ))}
-          </div>
+
+              {mobileMenu.columns.map((col) => (
+                <div key={col.title} className="mt-6">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5b6b8a] pb-2 border-b border-[var(--color-line)]">
+                    {col.title}
+                  </p>
+                  <ul className="mt-1 flex flex-col">
+                    {col.links.map((item) =>
+                      item.soon ? (
+                        <li key={item.label} aria-disabled className="py-3 opacity-60">
+                          <span className="flex items-center gap-2 text-[16px] font-semibold text-[var(--color-navy)]">
+                            {item.label}
+                            <span className="text-[10px] font-semibold uppercase tracking-[0.1em] rounded-full border border-[var(--color-line)] px-2 py-0.5">
+                              {COMING_SOON[locale]}
+                            </span>
+                          </span>
+                          <span className="block text-[13.5px] leading-[1.5] text-[#5b6b8a] mt-0.5">
+                            {item.desc}
+                          </span>
+                        </li>
+                      ) : (
+                        <li key={item.label}>
+                          <a
+                            href={localizeHref(locale, item.href)}
+                            target={isExternal(item.href) ? "_blank" : undefined}
+                            rel={isExternal(item.href) ? "noopener noreferrer" : undefined}
+                            onClick={closeDrawer}
+                            className="block py-3"
+                          >
+                            <span className="flex items-center gap-1.5 text-[16px] font-semibold text-[var(--color-navy)]">
+                              {item.label}
+                              {isExternal(item.href) ? (
+                                <svg viewBox="0 0 16 16" aria-hidden className="w-3 h-3 opacity-50">
+                                  <path
+                                    d="M6 3h7v7M13 3 4 12"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="1.7"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              ) : null}
+                            </span>
+                            <span className="block text-[13.5px] leading-[1.5] text-[#5b6b8a] mt-0.5">
+                              {item.desc}
+                            </span>
+                          </a>
+                        </li>
+                      ),
+                    )}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <nav className="flex flex-col">
+                {content.nav.map((link) =>
+                  link.menu !== null ? (
+                    <button
+                      key={link.label}
+                      type="button"
+                      aria-haspopup="true"
+                      onClick={() => setMobileKey(link.label)}
+                      className="flex items-center justify-between gap-3 w-full text-left bg-transparent border-0 border-b border-[var(--color-line)] cursor-pointer p-0 font-[family-name:var(--font-bricolage)] text-lg font-bold text-[var(--color-navy)] py-3"
+                    >
+                      {link.label}
+                      <svg viewBox="0 0 16 16" aria-hidden className="w-3.5 h-3.5 opacity-50">
+                        <path
+                          d="M6 3l5 5-5 5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  ) : (
+                    <a
+                      key={link.href}
+                      href={localizeHref(locale, link.href)}
+                      target={isExternal(link.href) ? "_blank" : undefined}
+                      rel={isExternal(link.href) ? "noopener noreferrer" : undefined}
+                      onClick={closeDrawer}
+                      className="flex items-center justify-between gap-3 font-[family-name:var(--font-bricolage)] text-lg font-bold text-[var(--color-navy)] py-3 border-b border-[var(--color-line)]"
+                    >
+                      {link.href === "#about" ? "About us" : link.label}
+                      {isExternal(link.href) ? (
+                        <svg viewBox="0 0 16 16" aria-hidden className="w-3.5 h-3.5 opacity-50">
+                          <path
+                            d="M6 3h7v7M13 3 4 12"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      ) : null}
+                    </a>
+                  ),
+                )}
+              </nav>
+
+              <div className="flex items-center gap-3 mt-6">
+                {SOCIALS.map(({ label, href, icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="grid place-items-center w-10 h-10 rounded-full border-2 border-[var(--color-navy)] text-[var(--color-navy)]"
+                  >
+                    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" aria-hidden>
+                      {icon}
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
         <div className="px-6 py-5 border-t border-[var(--color-line)]">
-          <Button
-            variant="primary"
-            href={bookingHref}
-            className="w-full justify-center"
-            onClick={() => setMenuOpen(false)}
-          >
-            {content.cta}
-          </Button>
+          {/* Inside a submenu, the drawer CTA leads to that section instead of contact. */}
+          {mobileMenu ? (
+            <Button
+              variant="primary"
+              href={localizeHref(locale, mobileMenu.featured.href)}
+              target={isExternal(mobileMenu.featured.href) ? "_blank" : undefined}
+              rel={isExternal(mobileMenu.featured.href) ? "noopener noreferrer" : undefined}
+              className="w-full justify-center"
+              onClick={closeDrawer}
+            >
+              {mobileMenu.featured.cta}
+            </Button>
+          ) : (
+            <Button
+              variant="primary"
+              href={bookingHref}
+              className="w-full justify-center"
+              onClick={closeDrawer}
+            >
+              {content.cta}
+            </Button>
+          )}
         </div>
       </div>
     </>

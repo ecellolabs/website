@@ -25,7 +25,7 @@ export function isLocale(value: string): value is Locale {
 export const messages = {
   en: {
     metadata: {
-      title: "Ecello Labs | Shipping AI for your business",
+      title: "Ecello Labs | Your vision, built and shipped",
       description:
         "Ecello Labs builds AI automation, software, and product development that take real work off your team's plate. A remote AI & software studio based in Bremerhaven, Germany.",
     },
@@ -33,6 +33,7 @@ export const messages = {
       homeLabel: "Ecello Labs home",
       openMenu: "Open menu",
       closeMenu: "Close menu",
+      backMenu: "Back",
       cta: "Get in touch",
         nav: [
         { href: "#about", label: "Who we are", menu: null },
@@ -87,8 +88,8 @@ export const messages = {
               eyebrow: "Ecello Services",
               title: "Tools we run, ready to use.",
               body: "Products we built for ourselves, opened up for teams that need the same thing.",
-              cta: "Get in touch",
-              href: "/contact",
+              cta: "View services",
+              href: "/services",
             },
             columns: [
               {
@@ -146,7 +147,7 @@ export const messages = {
         { href: "#process", label: "Our process" },
         { href: "#trust", label: "Reviews" },
         { href: LINKS.research, label: "Research" },
-        { href: LINKS.notebooks, label: "Services" },
+        { href: "/services", label: "Services" },
         { href: "/contact", label: "Get in touch" },
       ],
       reachLinks: [
@@ -164,8 +165,8 @@ export const messages = {
     },
     home: {
       hero: {
-        titleTop: "Shipping AI",
-        titleBottom: "for your business.",
+        titleTop: "Your vision,",
+        titleBottom: "built and shipped.",
         body: "We build digital tools, assistants, and software that take real work off your team's plate. Quality you can trust and results you can see!",
         primaryCta: "Get in touch",
         secondaryCta: "Who we are",
@@ -296,10 +297,65 @@ export const messages = {
         failed: "We couldn't run the spam check. Please try again, or email us directly.",
       },
     },
+    services: {
+      metadata: {
+        title: "Services - Ecello Labs",
+        description:
+          "Ecello Labs builds software end to end, with a focus on AI, machine learning, augmented reality and commercial-scale apps.",
+      },
+      eyebrow: "Our services",
+      title: "We build it all. We go deepest on four.",
+      intro:
+        "From a first website to the software that runs your whole business, we cover the full build. These are the areas where we bring the most experience.",
+      focusEyebrow: "Where we focus",
+      focus: [
+        {
+          key: "ai",
+          title: "Artificial Intelligence",
+          desc: "Assistants, agents and automations that take repetitive work off your team, built on the latest language models and wired into the tools you already use.",
+          points: ["AI assistants & chatbots", "Document and email automation", "Agents connected to your systems"],
+        },
+        {
+          key: "ml",
+          title: "Machine Learning",
+          desc: "Models trained on your own data to predict, classify and spot patterns - from the first experiment to a pipeline that runs in production.",
+          points: ["Forecasting & prediction", "Computer vision", "Data pipelines & MLOps"],
+        },
+        {
+          key: "ar",
+          title: "Augmented Reality",
+          desc: "Apps that place digital information exactly where it belongs in the real world, on phones and tablets, for work on site and in the field.",
+          points: ["On-site guidance & measurement", "Product visualisation", "iOS (ARKit) & Android (ARCore)"],
+        },
+        {
+          key: "apps",
+          title: "Commercial-scale apps",
+          desc: "Web and mobile products built to carry real customers and real revenue: secure, fast, and ready to grow with you.",
+          points: ["Web & mobile apps", "SaaS platforms", "Cloud infrastructure & scaling"],
+        },
+      ],
+      moreEyebrow: "And everything around it",
+      moreTitle: "One team for the whole build.",
+      moreBody: "You don't need a different agency for every piece. We also handle:",
+      more: [
+        "Websites & SEO",
+        "UI/UX design",
+        "Augmented reality",
+        "Automation & integrations",
+        "Data & dashboards",
+        "Cloud & DevOps",
+        "Maintenance & support",
+      ],
+      cta: {
+        title: "Have a project in mind?",
+        body: "Tell us what you want to build. We'll tell you honestly how we'd approach it, and what it would take.",
+        button: "Get in touch",
+      },
+    },
   },
   fr: {
     metadata: {
-      title: "Ecello Labs - Des solutions IA pour votre entreprise",
+      title: "Ecello Labs - Votre vision, conçue et livrée",
       description:
         "Ecello Labs crée des automatisations IA, des logiciels et du développement produit qui retirent du vrai travail des épaules de votre équipe. Un studio IA et logiciel à distance basé à Bremerhaven, en Allemagne.",
     },
@@ -307,6 +363,7 @@ export const messages = {
       homeLabel: "Accueil Ecello Labs",
       openMenu: "Ouvrir le menu",
       closeMenu: "Fermer le menu",
+      backMenu: "Retour",
       cta: "Réserver un appel",
            nav: [
         { href: "#about", label: "Qui nous sommes", menu: null },
@@ -361,8 +418,8 @@ export const messages = {
               eyebrow: "Ecello Services",
               title: "Des outils que nous exploitons, prêts à l'emploi.",
               body: "Des produits conçus pour nous-mêmes, ouverts aux équipes qui en ont besoin.",
-              cta: "Contactez-nous",
-              href: "/contact",
+              cta: "Voir nos services",
+              href: "/services",
             },
             columns: [
               {
@@ -420,7 +477,7 @@ export const messages = {
         { href: "#process", label: "Notre processus" },
         { href: "#trust", label: "Avis" },
         { href: LINKS.research, label: "Recherche" },
-        { href: LINKS.notebooks, label: "Services" },
+        { href: "/services", label: "Services" },
         { href: "/contact", label: "Contactez-nous" },
       ],
       reachLinks: [
@@ -438,8 +495,8 @@ export const messages = {
     },
     home: {
       hero: {
-        titleTop: "Nous livrons l'IA",
-        titleBottom: "pour votre entreprise.",
+        titleTop: "Votre vision,",
+        titleBottom: "conçue et livrée.",
         body: "Nous créons des outils numériques, des assistants et des logiciels qui retirent du vrai travail des épaules de votre équipe. Une qualité fiable et des résultats visibles.",
         primaryCta: "Contactez-nous",
         secondaryCta: "Qui nous sommes",
@@ -572,10 +629,65 @@ export const messages = {
           "Le contrôle anti-spam n'a pas abouti. Réessayez, ou écrivez-nous directement.",
       },
     },
+    services: {
+      metadata: {
+        title: "Services - Ecello Labs",
+        description:
+          "Ecello Labs développe des logiciels de bout en bout, avec un accent sur l'IA, le machine learning, la réalité augmentée et les applications à grande échelle.",
+      },
+      eyebrow: "Nos services",
+      title: "Nous construisons tout. Nous excellons dans quatre domaines.",
+      intro:
+        "D'un premier site web au logiciel qui fait tourner toute votre entreprise, nous couvrons l'ensemble du développement. Voici les domaines où notre expérience est la plus forte.",
+      focusEyebrow: "Nos domaines clés",
+      focus: [
+        {
+          key: "ai",
+          title: "Intelligence artificielle",
+          desc: "Des assistants, agents et automatisations qui libèrent votre équipe des tâches répétitives, basés sur les derniers modèles de langage et connectés aux outils que vous utilisez déjà.",
+          points: ["Assistants IA & chatbots", "Automatisation des documents et e-mails", "Agents connectés à vos systèmes"],
+        },
+        {
+          key: "ml",
+          title: "Machine learning",
+          desc: "Des modèles entraînés sur vos propres données pour prédire, classer et détecter des tendances - du premier essai à un pipeline en production.",
+          points: ["Prévision & prédiction", "Vision par ordinateur", "Pipelines de données & MLOps"],
+        },
+        {
+          key: "ar",
+          title: "Réalité augmentée",
+          desc: "Des applications qui placent l'information numérique exactement là où elle doit être dans le monde réel, sur téléphone et tablette, pour le travail sur site et sur le terrain.",
+          points: ["Guidage & mesure sur site", "Visualisation de produits", "iOS (ARKit) & Android (ARCore)"],
+        },
+        {
+          key: "apps",
+          title: "Applications à grande échelle",
+          desc: "Des produits web et mobiles conçus pour de vrais clients et un vrai chiffre d'affaires : sécurisés, rapides et prêts à grandir avec vous.",
+          points: ["Applications web & mobiles", "Plateformes SaaS", "Infrastructure cloud & montée en charge"],
+        },
+      ],
+      moreEyebrow: "Et tout ce qui va autour",
+      moreTitle: "Une seule équipe pour tout le projet.",
+      moreBody: "Pas besoin d'une agence différente pour chaque étape. Nous prenons aussi en charge :",
+      more: [
+        "Sites web & SEO",
+        "Design UI/UX",
+        "Réalité augmentée",
+        "Automatisation & intégrations",
+        "Données & tableaux de bord",
+        "Cloud & DevOps",
+        "Maintenance & support",
+      ],
+      cta: {
+        title: "Un projet en tête ?",
+        body: "Dites-nous ce que vous voulez construire. Nous vous dirons honnêtement comment nous l'aborderions, et ce que cela demanderait.",
+        button: "Contactez-nous",
+      },
+    },
   },
   de: {
     metadata: {
-      title: "Ecello Labs - KI für Ihr Unternehmen",
+      title: "Ecello Labs - Ihre Vision, gebaut und geliefert",
       description:
         "Ecello Labs entwickelt KI-Automatisierung, Software und Produktentwicklung, die Ihrem Team echte Arbeit abnehmen. Ein Remote-Studio für KI und Software mit Sitz in Bremerhaven.",
     },
@@ -583,6 +695,7 @@ export const messages = {
       homeLabel: "Ecello Labs Startseite",
       openMenu: "Menü öffnen",
       closeMenu: "Menü schließen",
+      backMenu: "Zurück",
       cta: "Gespräch buchen",
             nav: [
         { href: "#about", label: "Wer wir sind", menu: null },
@@ -637,8 +750,8 @@ export const messages = {
               eyebrow: "Ecello Services",
               title: "Werkzeuge von uns, sofort einsatzbereit.",
               body: "Produkte, die wir für uns selbst gebaut haben — offen für Teams, die dasselbe brauchen.",
-              cta: "Kontakt aufnehmen",
-              href: "/contact",
+              cta: "Leistungen ansehen",
+              href: "/services",
             },
             columns: [
               {
@@ -696,7 +809,7 @@ export const messages = {
         { href: "#process", label: "Unser Prozess" },
         { href: "#trust", label: "Stimmen" },
         { href: LINKS.research, label: "Forschung" },
-        { href: LINKS.notebooks, label: "Services" },
+        { href: "/services", label: "Services" },
         { href: "/contact", label: "Kontakt aufnehmen" },
       ],
       reachLinks: [
@@ -714,8 +827,8 @@ export const messages = {
     },
     home: {
       hero: {
-        titleTop: "KI liefern",
-        titleBottom: "für Ihr Unternehmen.",
+        titleTop: "Ihre Vision,",
+        titleBottom: "gebaut und geliefert.",
         body: "Wir bauen digitale Werkzeuge, Assistenten und Software, die Ihrem Team echte Arbeit abnehmen. Qualität, der Sie vertrauen können, und Ergebnisse, die sichtbar sind.",
         primaryCta: "Gespräch buchen",
         secondaryCta: "Wer wir sind",
@@ -848,6 +961,61 @@ export const messages = {
           "Die Spam-Prüfung ist fehlgeschlagen. Bitte erneut versuchen oder schreiben Sie uns direkt.",
       },
     },
+    services: {
+      metadata: {
+        title: "Leistungen - Ecello Labs",
+        description:
+          "Ecello Labs entwickelt Software von Anfang bis Ende, mit Schwerpunkt auf KI, Machine Learning, Augmented Reality und Apps im kommerziellen Maßstab.",
+      },
+      eyebrow: "Unsere Leistungen",
+      title: "Wir bauen alles. Vier Bereiche beherrschen wir besonders.",
+      intro:
+        "Von der ersten Website bis zur Software, die Ihr ganzes Unternehmen trägt: Wir übernehmen die komplette Entwicklung. In diesen Bereichen bringen wir die meiste Erfahrung mit.",
+      focusEyebrow: "Unsere Schwerpunkte",
+      focus: [
+        {
+          key: "ai",
+          title: "Künstliche Intelligenz",
+          desc: "Assistenten, Agenten und Automatisierungen, die Ihrem Team wiederkehrende Arbeit abnehmen - auf Basis aktueller Sprachmodelle und verbunden mit den Werkzeugen, die Sie bereits nutzen.",
+          points: ["KI-Assistenten & Chatbots", "Dokumenten- und E-Mail-Automatisierung", "Agenten, verbunden mit Ihren Systemen"],
+        },
+        {
+          key: "ml",
+          title: "Machine Learning",
+          desc: "Modelle, trainiert auf Ihren eigenen Daten, die vorhersagen, klassifizieren und Muster erkennen - vom ersten Experiment bis zur Pipeline im Produktivbetrieb.",
+          points: ["Prognosen & Vorhersagen", "Computer Vision", "Datenpipelines & MLOps"],
+        },
+        {
+          key: "ar",
+          title: "Augmented Reality",
+          desc: "Apps, die digitale Informationen genau dort in der realen Welt platzieren, wo sie hingehören - auf Smartphone und Tablet, für die Arbeit vor Ort und im Feld.",
+          points: ["Anleitung & Vermessung vor Ort", "Produktvisualisierung", "iOS (ARKit) & Android (ARCore)"],
+        },
+        {
+          key: "apps",
+          title: "Apps im kommerziellen Maßstab",
+          desc: "Web- und Mobile-Produkte für echte Kunden und echten Umsatz: sicher, schnell und bereit, mit Ihnen zu wachsen.",
+          points: ["Web- & Mobile-Apps", "SaaS-Plattformen", "Cloud-Infrastruktur & Skalierung"],
+        },
+      ],
+      moreEyebrow: "Und alles drumherum",
+      moreTitle: "Ein Team für das ganze Projekt.",
+      moreBody: "Sie brauchen nicht für jeden Teil eine andere Agentur. Wir übernehmen auch:",
+      more: [
+        "Websites & SEO",
+        "UI/UX-Design",
+        "Augmented Reality",
+        "Automatisierung & Integrationen",
+        "Daten & Dashboards",
+        "Cloud & DevOps",
+        "Wartung & Support",
+      ],
+      cta: {
+        title: "Haben Sie ein Projekt im Kopf?",
+        body: "Erzählen Sie uns, was Sie bauen möchten. Wir sagen Ihnen ehrlich, wie wir es angehen würden und was es braucht.",
+        button: "Kontakt aufnehmen",
+      },
+    },
   },
 } as const;
 
@@ -855,6 +1023,7 @@ export type Messages = (typeof messages)[Locale];
 export type HomeContent = Messages["home"];
 export type BookingContent = Messages["booking"];
 export type ContactContent = Messages["contact"];
+export type ServicesContent = Messages["services"];
 
 export function getMessages(locale: Locale): Messages {
   return messages[locale];
