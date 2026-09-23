@@ -213,10 +213,14 @@ h3 {
   animation: float-box 6.5s ease-in-out infinite;
 }
 
+/* The box keeps the artwork's 344:316 shape, but grows taller when the text
+   needs more room (e.g. enlarged text on iOS) instead of letting it spill out. */
 .box-wrap {
   position: relative;
   width: 100%;
   max-width: 344px;
+  aspect-ratio: 344 / 316;
+  display: flow-root; /* keeps .box-cover's top margin inside the box */
   margin: 0 auto;
   transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -226,9 +230,11 @@ h3 {
 }
 
 .box-wire {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   overflow: visible;
 }
 
@@ -248,12 +254,11 @@ h3 {
   stroke-width: 2;
 }
 
+/* Front face: 296/344 wide, starting below the 44/344 top face (margin % is of width). */
 .box-cover {
-  position: absolute;
-  left: 0;
-  top: 13.92%;
+  position: relative;
+  margin-top: 12.79%;
   width: 86.05%;
-  height: 86.08%;
   background: transparent;
   display: flex;
   flex-direction: column;

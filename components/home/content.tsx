@@ -341,7 +341,7 @@ export default function HomePage({ content, locale }: HomePageProps) {
               <div key={step.no} className="reveal flex justify-center">
                 <div className="float-box w-full max-w-[344px]" style={{ animationDelay: `${i * -1.6}s` }}>
                   <div className="box-wrap">
-                    <svg className="box-wire" viewBox="0 0 344 316" aria-hidden="true">
+                    <svg className="box-wire" viewBox="0 0 344 316" preserveAspectRatio="none" aria-hidden="true">
                       <path fill={theme.side} d="M344 0 L344 272 L296 316 L296 44 Z" />
                       <path fill={theme.top} d="M0 44 L48 0 L344 0 L296 44 Z" />
                       <path fill={theme.front} d="M0 44 L296 44 L296 316 L0 316 Z" />
