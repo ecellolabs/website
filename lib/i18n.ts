@@ -324,8 +324,8 @@ export const messages = {
         {
           key: "ar",
           title: "Augmented Reality",
-          desc: "Apps that place digital information exactly where it belongs in the real world, on phones and tablets, for work on site and in the field.",
-          points: ["On-site guidance & measurement", "Product visualisation", "iOS (ARKit) & Android (ARCore)"],
+          desc: "Apps that bring 3D content into the camera view, so people can see products, spaces and information in place before anything is built or bought.",
+          points: ["Interactive 3D experiences", "Product & space visualisation", "iOS (ARKit) & Android (ARCore)"],
         },
         {
           key: "apps",
@@ -656,8 +656,8 @@ export const messages = {
         {
           key: "ar",
           title: "Réalité augmentée",
-          desc: "Des applications qui placent l'information numérique exactement là où elle doit être dans le monde réel, sur téléphone et tablette, pour le travail sur site et sur le terrain.",
-          points: ["Guidage & mesure sur site", "Visualisation de produits", "iOS (ARKit) & Android (ARCore)"],
+          desc: "Des applications qui intègrent du contenu 3D dans la vue caméra, pour voir produits, espaces et informations en situation avant même qu'ils existent.",
+          points: ["Expériences 3D interactives", "Visualisation de produits & d'espaces", "iOS (ARKit) & Android (ARCore)"],
         },
         {
           key: "apps",
@@ -988,8 +988,8 @@ export const messages = {
         {
           key: "ar",
           title: "Augmented Reality",
-          desc: "Apps, die digitale Informationen genau dort in der realen Welt platzieren, wo sie hingehören - auf Smartphone und Tablet, für die Arbeit vor Ort und im Feld.",
-          points: ["Anleitung & Vermessung vor Ort", "Produktvisualisierung", "iOS (ARKit) & Android (ARCore)"],
+          desc: "Apps, die 3D-Inhalte ins Kamerabild bringen - Produkte, Räume und Informationen lassen sich so im Kontext erleben, bevor es sie überhaupt gibt.",
+          points: ["Interaktive 3D-Erlebnisse", "Produkt- & Raumvisualisierung", "iOS (ARKit) & Android (ARCore)"],
         },
         {
           key: "apps",
